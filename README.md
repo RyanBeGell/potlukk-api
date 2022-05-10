@@ -18,7 +18,7 @@
    * Last Name
    * Password
 
-##User Stories & Routes
+## User Stories & Routes
 
 1. Create
    * Create Potluck (POST /potlucks)
