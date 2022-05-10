@@ -1,5 +1,5 @@
-#Potlukk: Team 2
-##Entities & Attributes
+# Potlukk: Team 2
+## Entities & Attributes
 1. Potluck
    * Potluck_ID (serial, primary key)
    * Date/Time (UNIX Epoch)
