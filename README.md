@@ -29,7 +29,7 @@
 2. Read
    * Guest can view potlucks (GET /potlucks)
    * Get URL/Link to potluck (GET /potlucks/{potluck_ID})
-   * Get all items for a potluck (GET to /potlucks/{potluck_ID}/items)
+   * Get all items for a potluck (GET /potlucks/{potluck_ID}/items)
 3. Update
    * registered User can update potluck date/time (PATCH /potlucks/{potluck_ID})
    * User can update Status of Item to fulfilled (PATCH /item/{item_ID}/bringing)
