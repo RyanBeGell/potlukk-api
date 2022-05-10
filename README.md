@@ -34,5 +34,5 @@
    * registered User can update potluck date/time (PATCH /potlucks/{potluck_ID})
    * User can update Status of Item to fulfilled (PATCH /item/{item_ID}/bringing)
 4. Delete
-   * Registered user can remove items (DELETE to url/items/{item_ID})
-   * Registered user can delete potluck (DELETE to url/potlucks/{potluck_id})
+   * Registered user can remove items (DELETE /items/{item_ID})
+   * Registered user can delete potluck (DELETE /potlucks/{potluck_id})
