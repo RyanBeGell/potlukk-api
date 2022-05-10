@@ -16,7 +16,7 @@ public class Potluck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="potluck_id")
-    private String potluckID;
+    private int potluckID;
 
     @Column(name="datetime")
     private long dateTime;
