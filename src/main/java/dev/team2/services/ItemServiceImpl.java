@@ -28,7 +28,7 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public Item updateStatus(int itemId) {
-        Item item = itemRepo.findById(itemId).get();
+        Item item = itemRepo.getById(itemId);
         item.setStatus("Fulfilled");
         itemRepo.save(item);
         return item;
