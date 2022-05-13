@@ -1,6 +1,9 @@
 package dev.team2.controllers;
 
+import dev.team2.dtos.LoginInfo;
+import dev.team2.dtos.UserInfo;
 import dev.team2.entities.User;
+import dev.team2.services.LoginService;
 import dev.team2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,27 +18,32 @@ import java.util.List;
 public class UserController {
 
 
-    @Autowired // will try to find a bean that can be injected here
+    @Autowired
     private UserService userService;
 
-    @GetMapping("/users/{username}") // param in string must match param in method signature
-    @ResponseBody
-    public User retrieveUserByUsername(@PathVariable String username){
-        try {
-            return this.userService.findUserByUsername(username);
-        } catch (EntityNotFoundException e){
-            //username not found
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Username " + username + " not found.");
-        }
-    }
+    @Autowired
+    private LoginService loginService;
 
     @PostMapping("/users")
-    public User createUser(@RequestBody User user){ // will convert the JSON request body into an object
+    public User createUser(@RequestBody User user){
         try {
             return this.userService.registerUser(user);
         } catch (DataIntegrityViolationException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username + " + user.getUsername()
                     + "is already taken.");
+        }
+    }
+
+    @PostMapping("/login")
+    UserInfo login(@RequestBody LoginInfo loginInfo){
+        try {
+            //attempt to log in with the credentials provided
+            User user = loginService.login(loginInfo.getUsername(), loginInfo.getPassword());
+            //Return the User information (unless exception is not thrown for invalid credentials)
+            return new UserInfo(user.getUsername(), user.getFirstName(), user.getLastName());
+        } catch (RuntimeException e){
+            //exception thrown when trying to log in
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authentication failed: username or password incorrect.");
         }
     }
 }

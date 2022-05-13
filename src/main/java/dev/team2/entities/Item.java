@@ -1,18 +1,17 @@
 package dev.team2.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "item")
-@Data
-@NoArgsConstructor
+//lombok @Data not recommended being used with spring
+@Getter
+@Setter
 @AllArgsConstructor
-
+@NoArgsConstructor
+@ToString
 public class Item {
 
     @Id //Primary Key

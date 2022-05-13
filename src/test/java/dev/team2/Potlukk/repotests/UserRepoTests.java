@@ -1,4 +1,4 @@
-package dev.team2.Potlukk.userrepotests;
+package dev.team2.Potlukk.repotests;
 
 
 import dev.team2.entities.User;
@@ -45,6 +45,7 @@ public class UserRepoTests {
         userRepo.deleteById(testUser.getUsername());
         Optional<User> possibleUser = this.userRepo.findById(testUser.getUsername());
         Assertions.assertFalse(possibleUser.isPresent());
+        //test user removed from db
     }
 }
 

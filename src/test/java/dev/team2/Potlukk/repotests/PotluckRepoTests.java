@@ -1,4 +1,4 @@
-package dev.team2.Potlukk.potluckrepotests;
+package dev.team2.Potlukk.repotests;
 
 import dev.team2.entities.Potluck;
 import dev.team2.repos.PotluckRepo;
@@ -24,7 +24,7 @@ public class PotluckRepoTests {
     @Test
     @Order(1)
     public void createPotluck(){
-        Potluck potluck = new Potluck(0, date.getTime(), "rogerrabbit", true, "aaa4jsh5r");        //add fields after entity class commit
+        Potluck potluck = new Potluck(0, date.getTime(), "rogerrabbit", false,"klsdkja", "Community Potluck");        //add fields after entity class commit
         PotluckRepoTests.testPotluck = potluckRepo.save(potluck);
         Assertions.assertNotEquals(0, testPotluck.getPotluckID());
     }
@@ -32,26 +32,19 @@ public class PotluckRepoTests {
     @Test
     @Order(2)
     public void getAllPotlucks(){
-        Potluck a = new Potluck();      //add fields
-        Potluck b = new Potluck();      //add fields
-        Potluck c = new Potluck();      //add fields
-        potluckRepo.save(a);
-        potluckRepo.save(b);
-        potluckRepo.save(c);
         List<Potluck> potlucks = this.potluckRepo.findAll();
         int totalPotlucks = potlucks.size();
-        //3 potlucks added, therefore getAll must return at least 3
-        System.out.println(potlucks);
-        Assertions.assertTrue(totalPotlucks >=3 );
+        //1 potluck added from test one, we should have at least 1 in our return list
+        Assertions.assertTrue(totalPotlucks >=1 );
     }
 
     @Test
     @Order(3)
     public void getPotluckById() {
-        Optional<Potluck> possiblePotluck = this.potluckRepo.findById(1);
+        Optional<Potluck> possiblePotluck = this.potluckRepo.findById(testPotluck.getPotluckID());
         Assertions.assertTrue(possiblePotluck.isPresent()); //assert that we received a potluck
         Potluck potluck = possiblePotluck.get();//use fields from saved potluck
-        Assertions.assertNotEquals(0,testPotluck.getPotluckID());       //use fields from saved potluck
+        Assertions.assertNotEquals(0,potluck.getPotluckID());       //use fields from saved potluck
     }
 
     @Test
@@ -70,6 +63,7 @@ public class PotluckRepoTests {
     @Test
     @Order(5)
     public void deletePotluckById(){
+        //delete our test potluck
         potluckRepo.deleteById(testPotluck.getPotluckID());
         Optional<Potluck> possiblePotluck = potluckRepo.findById(testPotluck.getPotluckID());
         //assert that the potluck is not present in the DB after deletion

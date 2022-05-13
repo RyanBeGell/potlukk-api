@@ -1,7 +1,6 @@
-package dev.team2.Potlukk.userservicetests;
+package dev.team2.Potlukk.servicetests;
 
 import dev.team2.entities.User;
-import dev.team2.repos.UserRepo;
 import dev.team2.services.UserService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,7 @@ public class UserServiceTests {
 
     @Autowired
     public UserService userService;
-    @Autowired
-    public UserRepo userRepo;
+
     private static User testUser = null;
 
     @Test
@@ -54,10 +52,7 @@ public class UserServiceTests {
     @Test
     @Order(3)
     public void deleteUser(){
-        //removing my test user from the db
-        userRepo.deleteById(testUser.getUsername());
-        Optional<User> possibleUser = this.userRepo.findById(testUser.getUsername());
-        Assertions.assertFalse(possibleUser.isPresent());
+        Assertions.assertTrue(userService.deleteUserByUsername(testUser.getUsername()));
     }
 
 }
