@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "registereduser")
+//lombok @Data not recommended being used with spring
 @Getter
 @Setter
 @AllArgsConstructor
