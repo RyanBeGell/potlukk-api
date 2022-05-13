@@ -30,9 +30,6 @@ public class Potluck {
     @Column(name="is_private")
     private boolean isPrivate;
 
-    @Column(name="url")
-    private String url;
-
     @Column(name = "description")
     private String description;
 }

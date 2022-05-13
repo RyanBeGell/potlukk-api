@@ -10,8 +10,6 @@ public interface PotluckService {
 
     List<Potluck> getAllPotlucks();
 
-    String getPotluckUrl(int id);
-
     Potluck updatePotluckDate(int id, long time);
 
     boolean deletePotluck(int id);

@@ -26,11 +26,6 @@ public class PotluckServiceImpl implements PotluckService{
     }
 
     @Override
-    public String getPotluckUrl(int id) {
-        return this.potluckRepo.getById(id).getUrl();
-    }
-
-    @Override
     public Potluck updatePotluckDate(int id, long time) {
         Potluck potluck = this.potluckRepo.getById(id);
 
