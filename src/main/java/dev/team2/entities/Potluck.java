@@ -1,16 +1,19 @@
 package dev.team2.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
-@Data
+@Table(name="potluck")
+//lombok @Data not recommended being used with spring
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="potluck")
+@ToString
 public class Potluck {
 
     @Id
@@ -29,4 +32,7 @@ public class Potluck {
 
     @Column(name="url")
     private String url;
+
+    @Column(name = "description")
+    private String description;
 }
