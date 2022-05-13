@@ -1,4 +1,4 @@
-package dev.team2.applicationtests;
+package dev.team2.Potlukk.applicationtests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
