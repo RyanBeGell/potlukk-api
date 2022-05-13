@@ -24,7 +24,7 @@ public class PotluckRepoTests {
     @Test
     @Order(1)
     public void createPotluck(){
-        Potluck potluck = new Potluck(0, date.getTime(), "rogerrabbit", false,"klsdkja", "Community Potluck");        //add fields after entity class commit
+        Potluck potluck = new Potluck(0, date.getTime(), "rbegell", false, "Community Potluck");        //add fields after entity class commit
         PotluckRepoTests.testPotluck = potluckRepo.save(potluck);
         Assertions.assertNotEquals(0, testPotluck.getPotluckID());
     }

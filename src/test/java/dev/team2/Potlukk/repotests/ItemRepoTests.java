@@ -30,7 +30,7 @@ public class ItemRepoTests {
     @Test
     @Order(1)
     public void create_item(){
-        Potluck potluck = new Potluck(0, date.getTime(), "rogerrabbit", true,"dfgsfg", "Community Potluck");
+        Potluck potluck = new Potluck(0, date.getTime(), "rbegell", true, "Community Potluck");
         ItemRepoTests.testPotluck = potluckRepo.save(potluck);
         Item item = new Item(0, "Test Item 1", "Wanted", "Santa", potluck.getPotluckID());
         ItemRepoTests.testItem = itemRepo.save(item);

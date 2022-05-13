@@ -26,11 +26,6 @@ public class PotluckController {
         return this.potluckService.getAllPotlucks();
     }
 
-    @GetMapping("potlucks/{id}")
-    public String getPotluckUrl(@PathVariable int id){
-        return this.potluckService.getPotluckUrl(id);
-    }
-
     @PatchMapping("potlucks/{id}")
     public Potluck updatePotluckTime(@PathVariable int id, @RequestBody long time){
         return this.potluckService.updatePotluckDate(id, time);
