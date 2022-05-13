@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityNotFoundException;
 
 import java.util.Optional;
@@ -33,8 +32,16 @@ public class UserServiceImpl implements UserService {
         if(possibleUser.isPresent()){
             return possibleUser.get();
         }else{
-            throw new EntityNotFoundException("User: " + username + " not found"); // change
+            throw new EntityNotFoundException("User: " + username + " not found."); // change
         }
+    }
+
+    //returns true is successfully deleted, otherwise false
+    @Override
+    public boolean deleteUserByUsername(String username) {
+        userRepo.deleteById(username);
+        Optional<User> possibleUser = this.userRepo.findById(username);
+        return !possibleUser.isPresent();
     }
 }
 
