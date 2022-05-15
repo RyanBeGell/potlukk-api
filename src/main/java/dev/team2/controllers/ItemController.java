@@ -29,8 +29,8 @@ public class ItemController {
     }
 
     @PatchMapping("items/{itemId}/fulfilled")
-    public Item updateItem(@PathVariable int itemId){
-        return itemService.updateStatus(itemId);
+    public Item updateItem(@RequestBody Item item){
+        return itemService.updateStatus(item);
     }
 
     @DeleteMapping("items/{itemId}")

@@ -19,8 +19,7 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public Item createItem(Item item) {
-        this.itemRepo.save(item);
-        return item;
+        return this.itemRepo.save(item);
     }
 
     @Override
@@ -29,15 +28,8 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item updateStatus(int itemId) {
-        Optional<Item> possibleItem = itemRepo.findById(itemId);
-        if(possibleItem.isPresent()) {
-            Item item = possibleItem.get();
-            item.setStatus("Fulfilled");
-            return itemRepo.save(item);
-        }else{
-            throw new EntityNotFoundException("Item #[" + itemId + "] not found.");
-        }
+    public Item updateStatus(Item item) {
+        return itemRepo.save(item);
     }
 
     @Override
