@@ -10,7 +10,7 @@ public interface ItemService {
 
     List<Item> findItemsByPotluckId(int potluckId);
 
-    Item updateStatus(int itemId);
+    Item updateStatus(Item item);
 
     boolean deleteItem(int itemId);
 

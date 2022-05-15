@@ -10,6 +10,8 @@ public interface PotluckService {
 
     List<Potluck> getAllPotlucks();
 
+    Potluck getPotluckbyId(int potluckId);
+
     Potluck updatePotluckDate(int id, long time);
 
     boolean deletePotluck(int id);
