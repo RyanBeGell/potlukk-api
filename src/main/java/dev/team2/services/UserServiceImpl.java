@@ -21,9 +21,10 @@ public class UserServiceImpl implements UserService {
     public User registerUser(User user) {
         Optional<User> possibleUser = userRepo.findById(user.getUsername());
         if(possibleUser.isPresent()){
-            throw new DataIntegrityViolationException("Username + " +user.getUsername() + "is not unique.");
+            throw new DataIntegrityViolationException("Username + " + user.getUsername() + " is not unique.");
+        } else{
+            return userRepo.save(user);
         }
-        else return this.userRepo.save(user);
     }
 
     @Override
