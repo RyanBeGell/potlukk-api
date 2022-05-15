@@ -1,5 +1,6 @@
 package dev.team2.controllers;
 
+import dev.team2.dtos.PotluckDateOnly;
 import dev.team2.entities.Potluck;
 import dev.team2.services.PotluckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class PotluckController {
     }
 
     @PatchMapping("potlucks/{id}")
-    public Potluck updatePotluckTime(@PathVariable int id, @RequestBody long time){
-        return this.potluckService.updatePotluckDate(id, time);
+    public Potluck updatePotluckTime(@PathVariable int id, @RequestBody PotluckDateOnly dateTimeUpdate){
+        return this.potluckService.updatePotluckDate(id, dateTimeUpdate.getDateTime());
     }
 
     @DeleteMapping("potlucks/{id}")
