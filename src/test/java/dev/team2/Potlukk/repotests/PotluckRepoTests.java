@@ -1,7 +1,9 @@
 package dev.team2.Potlukk.repotests;
 
 import dev.team2.entities.Potluck;
+import dev.team2.entities.User;
 import dev.team2.repos.PotluckRepo;
+import dev.team2.services.UserService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,17 +16,22 @@ import java.util.Optional;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class) //
 public class PotluckRepoTests {
 
-
-    java.util.Date date = new Date();
-
     @Autowired
     private PotluckRepo potluckRepo;
+
+    @Autowired
+    private UserService userService;
+
     static Potluck testPotluck = null;
+    static User testUser = null;
+    java.util.Date date = new Date();
 
     @Test
     @Order(1)
     public void createPotluck(){
-        Potluck potluck = new Potluck(0, date.getTime(), "rbegell", false, "Community Potluck");        //add fields after entity class commit
+        User user = new User("Test95","Timmy","Tester","Password123");
+        PotluckRepoTests.testUser  = userService.registerUser(user);
+        Potluck potluck = new Potluck(0, date.getTime(), testUser.getUsername(), true, "Community Potluck");
         PotluckRepoTests.testPotluck = potluckRepo.save(potluck);
         Assertions.assertNotEquals(0, testPotluck.getPotluckID());
     }
@@ -65,6 +72,8 @@ public class PotluckRepoTests {
     public void deletePotluckById(){
         //delete our test potluck
         potluckRepo.deleteById(testPotluck.getPotluckID());
+        //delete test user as well
+        userService.deleteUserByUsername(testUser.getUsername());
         Optional<Potluck> possiblePotluck = potluckRepo.findById(testPotluck.getPotluckID());
         //assert that the potluck is not present in the DB after deletion
         Assertions.assertFalse(possiblePotluck.isPresent());
