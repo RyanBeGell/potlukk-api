@@ -27,6 +27,11 @@ public class PotluckServiceImpl implements PotluckService{
     }
 
     @Override
+    public Potluck getPotluckbyId(int potluckId) {
+        return potluckRepo.findById(potluckId).get();
+    }
+
+    @Override
     public Potluck updatePotluckDate(int id, long time) {
         Optional<Potluck> possiblePotluck = potluckRepo.findById(id);
         Potluck potluck;
