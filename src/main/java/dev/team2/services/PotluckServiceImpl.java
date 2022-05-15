@@ -1,12 +1,13 @@
 package dev.team2.services;
-
 import dev.team2.entities.Potluck;
 import dev.team2.repos.PotluckRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Service
@@ -27,12 +28,15 @@ public class PotluckServiceImpl implements PotluckService{
 
     @Override
     public Potluck updatePotluckDate(int id, long time) {
-        Potluck potluck = this.potluckRepo.getById(id);
-
-        potluck.setDateTime(time);
-        this.potluckRepo.save(potluck);
-
-        return potluck;
+        Optional<Potluck> possiblePotluck = potluckRepo.findById(id);
+        Potluck potluck;
+        if(possiblePotluck.isPresent()){
+            potluck = possiblePotluck.get();
+            potluck.setDateTime(time);
+            return potluckRepo.save(potluck);
+        }else {
+            throw new EntityNotFoundException("Potluck #[: " + id + "] not found.");
+        }
     }
 
     @Override
