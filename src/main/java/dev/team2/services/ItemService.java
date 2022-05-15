@@ -12,6 +12,6 @@ public interface ItemService {
 
     Item updateStatus(int itemId);
 
-    String deleteItem(int itemId);
+    boolean deleteItem(int itemId);
 
 }

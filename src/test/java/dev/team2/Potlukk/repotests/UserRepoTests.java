@@ -23,7 +23,7 @@ public class UserRepoTests {
     @Order(1)
     public void createUser() {
         User testUser = new User("Ryan210","Ryan","BeGell","Password");
-        UserRepoTests.testUser =userRepo.save(testUser);
+        UserRepoTests.testUser = userRepo.save(testUser);
         Assertions.assertEquals("Ryan210", testUser.getUsername());  //change to testUser
     }
 

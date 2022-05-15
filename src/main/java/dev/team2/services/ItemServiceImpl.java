@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Service
@@ -28,15 +30,20 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public Item updateStatus(int itemId) {
-        Item item = itemRepo.getById(itemId);
-        item.setStatus("Fulfilled");
-        itemRepo.save(item);
-        return item;
+        Optional<Item> possibleItem = itemRepo.findById(itemId);
+        if(possibleItem.isPresent()) {
+            Item item = possibleItem.get();
+            item.setStatus("Fulfilled");
+            return itemRepo.save(item);
+        }else{
+            throw new EntityNotFoundException("Item #[" + itemId + "] not found.");
+        }
     }
 
     @Override
-    public String deleteItem(int itemId) {
+    public boolean deleteItem(int itemId) {
         itemRepo.deleteById(itemId);
-        return "Item Was Deleted Successfully";
+        Optional<Item> possibleItem = itemRepo.findById(itemId);
+        return !possibleItem.isPresent();   //return true if deleted, false if still exists.
     }
 }

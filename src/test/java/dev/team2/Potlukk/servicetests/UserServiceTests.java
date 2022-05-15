@@ -22,15 +22,15 @@ public class UserServiceTests {
     @Test
     @Order(1)
     public void createUserWithUniqueId() {
-        User user = new User("Timmy156","Timmy","Tester","Password123");
+        User user = new User("Timmy152","Timmy","Tester","Password123");
         UserServiceTests.testUser = userService.registerUser(user);
-        Assertions.assertEquals("Timmy156", testUser.getUsername());
+        Assertions.assertEquals("Timmy152", testUser.getUsername());
     }
 
     @Test
     @Order(2)
     public void createUserWithNonUniqueId() {
-        User user = new User("Timmy156","Timmy","Tester","Password123");
+        User user = new User("Timmy152","Timmy","Tester","Password123");
         Assertions.assertThrows(DataIntegrityViolationException.class, () ->
                 UserServiceTests.testUser = userService.registerUser(user));
     }
